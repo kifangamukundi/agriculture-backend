@@ -1,25 +1,30 @@
 {
-  "name": "Agriculture-Backend",
+  "name": "AgriBackendAPI",
   "version": "1.0.0",
-  "description": "The agriculture backend Project",
-  "main": "index.js",
+  "description": "An agriculture Project with Nodejs and Express",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon server.js"
   },
-  "keywords": [],
+  "keywords": [
+    "node.js",
+    "express",
+    "jwt",
+    "refresh token",
+    "authentication",
+    "authorization",
+    "mongodb"
+  ],
   "author": "Kifanga Mukundi",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "crypto-js": "^4.1.1",
-    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.5",
-    "nodemon": "^2.0.12",
-    "stripe": "^8.174.0"
-  },
-  "engines": {
-    "node": "16.x"
+    "mongoose": "^5.12.10",
+    "nodemon": "^2.0.16",
+    "uuid": "^8.3.2"
   }
 }
