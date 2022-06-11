@@ -5,6 +5,7 @@ const { product: Product } = db;
 exports.allProducts = (req, res, next) => {
   Product.find()
     .select("title description categories")
+    .populate("categories")
     .exec()
     .then(docs => {
       const response = {
@@ -71,6 +72,7 @@ exports.getProduct = (req, res, next) => {
   const id = req.params.productId;
   Product.findById(id)
     .select("title description _id productImage categories")
+    .populate("categories")
     .exec()
     .then(doc => {
       console.log("From database", doc);
