@@ -5,11 +5,11 @@ module.exports = function(app) {
 
 app.get("/api/category/all", controller.allCategory);
 
-app.post("/api/categoty", [authJwt.verifyToken], controller.createCategory);
+app.post("/api/category", [authJwt.verifyToken, authJwt.isModerator], controller.createCategory);
 
 app.get("/api/category/:categoryId", controller.getCategory);
 
-app.patch("/api/category/:categoryId", [authJwt.verifyToken], controller.updateCategory);
+app.patch("/api/category/:categoryId", [authJwt.verifyToken, authJwt.isModerator], controller.updateCategory);
 
-app.delete("/api/category/:categoryId", [authJwt.verifyToken], controller.deleteCategory);
+app.delete("/api/category/:categoryId", [authJwt.verifyToken, authJwt.isAdmin], controller.deleteCategory);
 };

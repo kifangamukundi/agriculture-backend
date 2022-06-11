@@ -92,9 +92,105 @@ const isModerator = (req, res, next) => {
   });
 };
 
+const isFieldAgent = (req, res, next) => {
+  User.findById(req.userId).exec((err, user) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    Role.find(
+      {
+        _id: { $in: user.roles }
+      },
+      (err, roles) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+
+        for (let i = 0; i < roles.length; i++) {
+          if (roles[i].name === "fieldAgent") {
+            next();
+            return;
+          }
+        }
+
+        res.status(403).send({ message: "Require fieldAgent Role!" });
+        return;
+      }
+    );
+  });
+};
+
+const isTransporter = (req, res, next) => {
+  User.findById(req.userId).exec((err, user) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    Role.find(
+      {
+        _id: { $in: user.roles }
+      },
+      (err, roles) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+
+        for (let i = 0; i < roles.length; i++) {
+          if (roles[i].name === "transporter") {
+            next();
+            return;
+          }
+        }
+
+        res.status(403).send({ message: "Require transporter Role!" });
+        return;
+      }
+    );
+  });
+};
+
+const isFarmer = (req, res, next) => {
+  User.findById(req.userId).exec((err, user) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    Role.find(
+      {
+        _id: { $in: user.roles }
+      },
+      (err, roles) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+
+        for (let i = 0; i < roles.length; i++) {
+          if (roles[i].name === "farmer") {
+            next();
+            return;
+          }
+        }
+
+        res.status(403).send({ message: "Require farmer Role!" });
+        return;
+      }
+    );
+  });
+};
+
 const authJwt = {
   verifyToken,
   isAdmin,
-  isModerator
+  isModerator,
+  isFieldAgent,
+  isTransporter,
+  isFarmer
 };
 module.exports = authJwt;

@@ -60,13 +60,31 @@ function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
       new Role({
-        name: "user"
+        name: "farmer"
       }).save(err => {
         if (err) {
           console.log("error", err);
         }
 
-        console.log("added 'user' to roles collection");
+        console.log("added 'farmer' to roles collection");
+      });
+      new Role({
+        name: "transporter"
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'transporter' to roles collection");
+      });
+      new Role({
+        name: "fieldAgent"
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'fieldAgent' to roles collection");
       });
 
       new Role({

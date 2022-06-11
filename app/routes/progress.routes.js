@@ -3,13 +3,13 @@ const controller = require("../controllers/progress.controller");
 
 module.exports = function(app) {
 
-app.get("/api/progress/all", controller.allProgress);
+app.get("/api/progress/all", [authJwt.verifyToken, authJwt.isFarmer], controller.allProgress);
 
-app.post("/api/progress", [authJwt.verifyToken], controller.createProgress);
+app.post("/api/progress", [authJwt.verifyToken, authJwt.isFarmer], controller.createProgress);
 
-app.get("/api/progress/:progressId", controller.getProgress);
+app.get("/api/progress/:progressId", [authJwt.verifyToken, authJwt.isFarmer], controller.getProgress);
 
-app.patch("/api/progress/:progressId", [authJwt.verifyToken], controller.updateProgress);
+app.patch("/api/progress/:progressId", [authJwt.verifyToken, authJwt.isFarmer], controller.updateProgress);
 
-app.delete("/api/progress/:progressId", [authJwt.verifyToken], controller.deleteProgress);
+app.delete("/api/progress/:progressId", [authJwt.verifyToken, authJwt.isFarmer], controller.deleteProgress);
 };
