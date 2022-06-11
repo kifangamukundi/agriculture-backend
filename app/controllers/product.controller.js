@@ -1,16 +1,17 @@
 const mongoose = require("mongoose");
+const Product = require("../models/product.model");
 
 exports.allProducts = (req, res, next) => {
   Product.find()
-    .select("name price _id productImage categories")
+    .select("title description categories")
     .exec()
     .then(docs => {
       const response = {
         count: docs.length,
         products: docs.map(doc => {
           return {
-            name: doc.name,
-            price: doc.price,
+            title: doc.title,
+            description: doc.description,
             productImage: doc.productImage,
             categories: doc.categories,
             _id: doc._id,
@@ -34,10 +35,10 @@ exports.allProducts = (req, res, next) => {
 exports.createProduct = (req, res, next) => {
   const product = new Product({
     _id: new mongoose.Types.ObjectId(),
-    name: req.body.name,
-    price: req.body.price,
+    title: req.body.title,
+    description: req.body.description,
+    // productImage: req.file.path,
     categories: req.body.categories
-    // productImage: req.file.path
   });
   product
     .save()
@@ -68,7 +69,7 @@ exports.createProduct = (req, res, next) => {
 exports.getProduct = (req, res, next) => {
   const id = req.params.productId;
   Product.findById(id)
-    .select("name price _id productImage categories")
+    .select("title description _id productImage categories")
     .exec()
     .then(doc => {
       console.log("From database", doc);
