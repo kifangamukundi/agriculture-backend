@@ -3,9 +3,15 @@ const mongoose = require("mongoose");
 const User = mongoose.model(
   "User",
   new mongoose.Schema({
-    username: String,
+    firstName: String,
+    lastName: String,
     email: String,
+    username: String,
     password: String,
+    isActive: {
+      type: Boolean,
+      default: false
+    },
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,

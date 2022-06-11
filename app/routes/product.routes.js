@@ -33,13 +33,13 @@ module.exports = function(app) {
   
 
 
-app.get("/api/product/all", controller.products_get_all);
+app.get("/api/product/all", controller.allProducts);
 
-app.post("/api/product", [authJwt.verifyToken], upload.single('productImage'), controller.products_create_product); // upload.single('productImage')
+app.post("/api/product", [authJwt.verifyToken], upload.single('productImage'), controller.createProduct); // upload.single('productImage')
 
-app.get("/api/product/:productId", controller.products_get_product);
+app.get("/api/product/:productId", controller.getProduct);
 
-app.patch("/api/product/:productId", [authJwt.verifyToken], controller.products_update_product);
+app.patch("/api/product/:productId", [authJwt.verifyToken], controller.updateProduct);
 
-app.delete("/api/product/:productId", [authJwt.verifyToken], controller.products_delete);
+app.delete("/api/product/:productId", [authJwt.verifyToken], controller.deleteProduct);
 };
