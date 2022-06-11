@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const Product = require("../models/product.model");
+const db = require("../models");
+const { product: Product } = db;
 
 exports.allProducts = (req, res, next) => {
   Product.find()
@@ -97,7 +98,6 @@ exports.updateProduct = (req, res, next) => {
   const id = req.params.productId;
   const updateObject = req.body;
 
-  console.log(updateObject)
   Product.updateOne({_id: id}, {$set: updateObject})
     .exec()
     .then(result => {
