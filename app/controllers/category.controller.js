@@ -116,7 +116,7 @@ exports.updateCategory = (req, res, next) => {
 
 exports.deleteCategory = (req, res, next) => {
   const id = req.params.categoryId;
-  Category.remove({ _id: id })
+  Category.deleteOne({ _id: id })
     .exec()
     .then(result => {
       res.status(200).json({

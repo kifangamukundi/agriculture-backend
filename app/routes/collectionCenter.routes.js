@@ -11,5 +11,5 @@ app.get("/api/collectionCenter/:collectionCenterId", controller.getCollectionCen
 
 app.patch("/api/collectionCenter/:collectionCenterId", [authJwt.verifyToken, authJwt.isModerator], controller.updateCollectionCenter);
 
-app.delete("/api/collectionCenter/:collectioCenterId", [authJwt.verifyToken, authJwt.isAdmin], controller.deleteCollectionCenter);
+app.delete("/api/collectionCenter/:collectionCenterId", [authJwt.verifyToken, authJwt.isAdmin], controller.deleteCollectionCenter);
 };
