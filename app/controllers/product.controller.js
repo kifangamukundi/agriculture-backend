@@ -4,7 +4,7 @@ const { product: Product } = db;
 
 exports.allProducts = (req, res, next) => {
   Product.find()
-    .select("title description categories")
+    .select("title description categories _id")
     .populate("categories")
     .exec()
     .then(docs => {
@@ -99,6 +99,7 @@ exports.getProduct = (req, res, next) => {
 exports.updateProduct = (req, res, next) => {
   const id = req.params.productId;
   const updateObject = req.body;
+  console.log(req.body.categories)
 
   Product.updateOne({_id: id}, {$set: updateObject})
     .exec()
