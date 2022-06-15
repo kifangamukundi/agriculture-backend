@@ -4,7 +4,6 @@ const { product: Product } = db;
 
 exports.allProducts = (req, res, next) => {
   Product.find()
-    .select("title description categories _id")
     .populate("categories")
     .exec()
     .then(docs => {
@@ -39,7 +38,7 @@ exports.createProduct = (req, res, next) => {
     _id: new mongoose.Types.ObjectId(),
     title: req.body.title,
     description: req.body.description,
-    // productImage: req.file.path,
+    productImage: req.body.productImage,
     categories: req.body.categories
   });
   product
@@ -49,9 +48,10 @@ exports.createProduct = (req, res, next) => {
       res.status(201).json({
         message: "Created product successfully",
         createdProduct: {
-          name: result.name,
-          price: result.price,
+          title: result.title,
+          description: result.description,
           categories: result.categories,
+          productImage: result.productImage,
           _id: result._id,
           request: {
             type: "GET",
@@ -71,7 +71,6 @@ exports.createProduct = (req, res, next) => {
 exports.getProduct = (req, res, next) => {
   const id = req.params.productId;
   Product.findById(id)
-    .select("title description _id productImage categories")
     .populate("categories")
     .exec()
     .then(doc => {
