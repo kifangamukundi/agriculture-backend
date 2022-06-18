@@ -7,8 +7,10 @@ const bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
   const user = new User({
-    username: req.body.username,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     email: req.body.email,
+    username: req.body.username,
     password: bcrypt.hashSync(req.body.password, 8),
   });
 
@@ -41,7 +43,7 @@ exports.signup = (req, res) => {
         }
       );
     } else {
-      Role.findOne({ name: "user" }, (err, role) => {
+      Role.findOne({ name: "farmer" }, (err, role) => {
         if (err) {
           res.status(500).send({ message: err });
           return;
