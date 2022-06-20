@@ -35,7 +35,7 @@ module.exports = function(app) {
 
 app.get("/api/product/all", controller.allProducts);
 
-app.post("/api/product", [authJwt.verifyToken, authJwt.isModerator], upload.single('productImage'), controller.createProduct); // upload.single('productImage')
+app.post("/api/product", [authJwt.verifyToken, authJwt.isAdmin], upload.single('productImage'), controller.createProduct); // upload.single('productImage')
 
 app.get("/api/product/:productId", controller.getProduct);
 
