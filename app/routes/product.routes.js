@@ -35,11 +35,11 @@ module.exports = function(app) {
 
 app.get("/api/product/all", controller.allProducts);
 
-app.post("/api/product", [authJwt.verifyToken, authJwt.isAdmin], upload.single('productImage'), controller.createProduct); // upload.single('productImage')
+app.post("/api/product", [authJwt.verifyToken, authJwt.isModerator, authJwt.isAdmin], upload.single('productImage'), controller.createProduct); // upload.single('productImage')
 
 app.get("/api/product/:productId", controller.getProduct);
 
-app.patch("/api/product/:productId", [authJwt.verifyToken, authJwt.isModerator], controller.updateProduct);
+app.patch("/api/product/:productId", [authJwt.verifyToken, (authJwt.isModerator || authJwt.isAdmin)], controller.updateProduct);
 
 app.delete("/api/product/:productId", [authJwt.verifyToken, authJwt.isAdmin], controller.deleteProduct);
 };
