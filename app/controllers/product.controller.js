@@ -104,7 +104,7 @@ exports.updateProduct = (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-        message: "Product updated",
+        message: "Product updated from backend message",
         request: {
           type: "GET",
           url: "http://localhost:8080/api/product/" + id
