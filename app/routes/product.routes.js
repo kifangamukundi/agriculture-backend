@@ -1,5 +1,5 @@
 const { authJwt } = require("../middlewares");
-const controller = require("../controllers/product.controller");
+const productsController = require("../controllers/product.controller");
 const multer = require('multer');
 
 module.exports = function(app) {
@@ -33,13 +33,13 @@ module.exports = function(app) {
   
 
 
-app.get("/api/product/all", controller.allProducts);
+app.get("/api/products", productsController.allProducts);
 
-app.post("/api/product", [authJwt.verifyToken, authJwt.isModerator], upload.single('productImage'), controller.createProduct); // upload.single('productImage')
+app.post("/api/products", [authJwt.verifyToken, authJwt.isModerator], upload.single('productImage'), productsController.createProduct); // upload.single('productImage')
 
-app.get("/api/product/:productId", controller.getProduct);
+app.get("/api/products/:productId", productsController.getProduct);
 
-app.patch("/api/product/:productId", [authJwt.verifyToken, authJwt.isModerator], controller.updateProduct);
+app.patch("/api/products/:productId", [authJwt.verifyToken, authJwt.isModerator], productsController.updateProduct);
 
-app.delete("/api/product/:productId", [authJwt.verifyToken, authJwt.isModerator], controller.deleteProduct);
+app.delete("/api/products/:productId", [authJwt.verifyToken, authJwt.isModerator], productsController.deleteProduct);
 };
