@@ -1,15 +1,18 @@
+require('dotenv').config();
 const express = require("express");
-const cors = require("cors");
-const dbConfig = require("./app/config/db.config");
-
 const app = express();
 
-let corsOptions = {
-  origin: "*",
-  credentials:true,
-  optionSuccessStatus:200,
-};
+const cors = require('cors');
+const corsOptions = require('./app/config/cors.options');
+const mongoose = require('mongoose');
+const connectDB = require('./app/config/db.connection');
 
+const PORT = process.env.PORT || 3500;
+
+// Connect to MongoDB
+connectDB();
+
+// Cross Origin Resource Sharing
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
@@ -20,20 +23,6 @@ app.use(express.urlencoded({ extended: true }));
 
 const db = require("./app/models");
 const Role = db.role;
-
-db.mongoose
-  .connect(`mongodb+srv://kifanga:64GB1995@kifanga.nefle.mongodb.net/?retryWrites=true&w=majority`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => {
-    console.log("Successfully connect to MongoDB YAAY.");
-    initial();
-  })
-  .catch(err => {
-    console.error("Connection error", err);
-    process.exit();
-  });
 
 // simple route
 app.get("/", (req, res) => {
@@ -52,10 +41,10 @@ require("./app/routes/collectionCenter.routes")(app);
 require("./app/routes/county.routes")(app);
 require("./app/routes/countyPlace.routes")(app);
 
-// set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+
+mongoose.connection.once('open', () => {
+  console.log('Connected to MongoDB');
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
 
 function initial() {
@@ -111,3 +100,8 @@ function initial() {
     }
   });
 }
+
+// Configurations for environment variables
+// PORT=5000
+// DATABASE_URI=""
+// SECRET_KEY=""
