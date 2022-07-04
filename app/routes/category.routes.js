@@ -3,13 +3,13 @@ const controller = require("../controllers/category.controller");
 
 module.exports = function(app) {
 
-app.get("/api/category/all", controller.allCategory);
+app.get("/api/categories", controller.allCategory);
 
-app.post("/api/category", [authJwt.verifyToken, authJwt.isModerator], controller.createCategory);
+app.post("/api/categories", [authJwt.verifyToken, authJwt.isModerator], controller.createCategory);
 
-app.get("/api/category/:categoryId", controller.getCategory);
+app.get("/api/categories/:categoryId", controller.getCategory);
 
-app.patch("/api/category/:categoryId", [authJwt.verifyToken, authJwt.isModerator], controller.updateCategory);
+app.patch("/api/categories/:categoryId", [authJwt.verifyToken, authJwt.isModerator], controller.updateCategory);
 
-app.delete("/api/category/:categoryId", [authJwt.verifyToken, authJwt.isAdmin], controller.deleteCategory);
+app.delete("/api/categories/:categoryId", [authJwt.verifyToken, authJwt.isAdmin], controller.deleteCategory);
 };
