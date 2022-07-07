@@ -12,8 +12,6 @@ const PORT = process.env.PORT || 3500;
 // Connect to MongoDB
 connectDB();
 
-// preflight
-app.options('*', cors(corsOptions));
 // Cross Origin Resource Sharing
 app.use(cors(corsOptions));
 
