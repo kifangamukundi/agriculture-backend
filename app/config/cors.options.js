@@ -7,12 +7,10 @@ const corsOptions = {
         } else {
             callback(new Error('Not allowed by CORS'));
         }
-        if ('OPTIONS' == req.method) {
-            res.sendStatus(200);
-          } else {
-            next();
-        }
     },
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allowedHeaders: ["Access-Control-Allow-Origin", "Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
+    credentials: true,
     optionsSuccessStatus: 200
 }
 
