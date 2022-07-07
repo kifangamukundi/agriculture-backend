@@ -8,6 +8,7 @@ const corsOptions = {
             callback(new Error('Not allowed by CORS'));
         }
     },
+    preflightContinue: true,
     optionsSuccessStatus: 200
 }
 
