@@ -13,7 +13,22 @@ const PORT = process.env.PORT || 3500;
 connectDB();
 
 // Cross Origin Resource Sharing
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Origin", "Access-Control-Allow-Origin", "Content-Type",
+    "Accept", "Authorization", "Origin, Accept", "X-Requested-With",
+    "Access-Control-Request-Method", "Access-Control-Request-Headers"
+  );
+  if (req.method === 'OPTIONS') {
+      res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+      return res.status(200).json({
+          message: 'OK'
+      });
+  }
+  next();
+});
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
