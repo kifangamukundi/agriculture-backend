@@ -4,8 +4,8 @@ const { product: Product } = db;
 const allProducts = async (req, res, next) => {
     try {
       const products = await Product.find().populate("categories");
-      if (!products) {
-        return res.status(204).json({
+      if (products.length === 0) {
+        return res.status(404).json({
            'message': 'No Products found.' 
         });
       }
@@ -56,8 +56,8 @@ const getProduct = async (req, res, next) => {
         return res.status(204).json({ "message": `No product matches ID ${req.params.id}.` });
     }
     res.status(200).json({
-      message: "Product deleted",
-      deletedProduct: product
+      message: "Product fetched",
+      fetchedProduct: product
     });
   } catch (err) {
     res.status(500).json({
