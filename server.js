@@ -17,7 +17,7 @@ connectDB();
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,x-access-token');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, Access-Control-Allow-Origin, Content-Type,Accept, Authorization, Origin, Accept, X-Requested-With,Access-Control-Request-Method, Access-Control-Request-Headers, x-access-token');
   res.setHeader('Access-Control-Allow-Credentials', true);
   // handle OPTIONS method
   if ('OPTIONS' == req.method) {
