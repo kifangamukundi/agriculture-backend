@@ -7,7 +7,7 @@ module.exports = function(app) {
   console.log("auth.routes called");
 
   app.post(
-    "/api/auth/signup", cors(),
+    "/api/auth/signup",
     [
       verifySignUp.checkDuplicateUsernameOrEmail,
       verifySignUp.checkRolesExisted
@@ -15,7 +15,7 @@ module.exports = function(app) {
     controller.signup
   );
 
-  app.post("/api/auth/signin", cors(), controller.signin);
+  app.post("/api/auth/signin", controller.signin);
 
-  app.post("/api/auth/refreshtoken", cors(), controller.refreshToken);
+  app.post("/api/auth/refreshtoken", controller.refreshToken);
 };
