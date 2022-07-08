@@ -14,7 +14,7 @@ connectDB();
 
 // Cross Origin Resource Sharing
 app.use(cors())
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
