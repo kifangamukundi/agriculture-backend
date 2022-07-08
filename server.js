@@ -13,7 +13,22 @@ const PORT = process.env.PORT || 3500;
 connectDB();
 
 // Cross Origin Resource Sharing
-app.use(cors(corsOptions));
+app.use((req, res, next) => {
+  const allowedOrigins = [
+    'https://www.synergisticagribusiness.com/',
+    'http://www.synergisticagribusiness.com/',
+    'https://mukundi-agriculture-backend.herokuapp.com/'
+  ];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.header('Access-Control-Allow-Methods', 'GET, POST');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-access-token');
+  res.header('Access-Control-Allow-Credentials', true);
+  return next();
+});
+// app.use(cors(corsOptions));
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
