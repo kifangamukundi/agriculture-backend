@@ -53,7 +53,7 @@ const getProduct = async (req, res, next) => {
   try {
     const product = await Product.findOne({ _id: req.params.id }).exec();
     if (!product) {
-        return res.status(204).json({ "message": `No product matches ID ${req.params.id}.` });
+        return res.status(404).json({ "message": `No product matches ID ${req.params.id}.` });
     }
     res.status(200).json({
       message: "Product fetched",
@@ -61,7 +61,7 @@ const getProduct = async (req, res, next) => {
     });
   } catch (err) {
     res.status(500).json({
-      message: "Product deletion failed",
+      message: "Product fetch failed",
       error: err
     });
   }
