@@ -3,7 +3,8 @@ const express = require("express");
 const app = express();
 
 const cors = require('cors');
-// const corsOptions = require('./app/config/cors.options');
+const corsOptions = require('./app/config/cors.options');
+const allowedOrigins = require('./app/config/allowed.origins');
 const mongoose = require('mongoose');
 const connectDB = require('./app/config/db.connection');
 
@@ -13,12 +14,12 @@ const PORT = process.env.PORT || 3500;
 connectDB();
 
 // Cross Origin Resource Sharing
-
-const corsOptions = {
-	origin: 'https://www.synergisticagribusiness.com/',
-	optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true
+  })
+);
 
 // parse requests of content-type - application/json
 app.use(express.json());

@@ -8,9 +8,7 @@ const corsOptions = {
             callback(new Error('Not allowed by CORS'));
         }
     },
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightcontinue: false,
-    optionsSuccessStatus: 204
+    optionsSuccessStatus: 200
 }
 
 // options for localhost
