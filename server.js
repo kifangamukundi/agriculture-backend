@@ -13,19 +13,10 @@ const PORT = process.env.PORT || 3500;
 connectDB();
 
 // Cross Origin Resource Sharing
-app.use((req, res, next) => {
-  const allowedOrigins = [
-    'www.synergisticagribusiness.com/',
-    'mukundi-agriculture-backend.herokuapp.com/'
-  ];
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-  res.header('Access-Control-Allow-Methods', 'GET, POST');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-access-token');
-  res.header('Access-Control-Allow-Credentials', true);
-  return next();
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
 });
 // app.use(cors(corsOptions));
 
