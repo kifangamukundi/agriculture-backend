@@ -64,7 +64,7 @@ const bcrypt = require("bcryptjs");
 // };
 
 const handleNewUser = async (req, res) => {
-  const { firstName, lastName, email, username, password } = req.params;
+  const { firstName, lastName, email, username, password } = req.body;
   console.log(firstName, lastName, email, username, password);  
   // if (!username || !password) return res.status(400).json({ 'message': 'Username and password are required.' });
 

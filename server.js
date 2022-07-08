@@ -27,8 +27,11 @@ app.use(function(req, res, next) {
   }
 });
 
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+// built-in middleware to handle urlencoded form data
+app.use(express.urlencoded({ extended: false }));
+
+// built-in middleware for json 
+app.use(express.json());
 
 const db = require("./app/models");
 const Role = db.role;
