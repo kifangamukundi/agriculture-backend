@@ -14,13 +14,11 @@ const PORT = process.env.PORT || 3500;
 connectDB();
 
 // Cross Origin Resource Sharing
-const corsOptions = {
-  origin: "https://www.synergisticagribusiness.com/"
-};
-app.use(cors(corsOptions));
-
-// parse requests of content-type - application/json
-app.use(express.json());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://www.synergisticagribusiness.com/");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
