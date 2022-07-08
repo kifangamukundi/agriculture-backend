@@ -49,7 +49,7 @@ const createProduct = async (req, res, next) => {
 };
 
 const getProduct = async (req, res, next) => {
-  if (!req?.params?.id) return res.status(400).json({ 'message': 'Employee ID required.' });
+  if (!req?.params?.productId) return res.status(400).json({ 'message': 'Product ID required.' });
   try {
     const product = await Product.findOne({ _id: req.params.id }).exec();
     if (!product) {
