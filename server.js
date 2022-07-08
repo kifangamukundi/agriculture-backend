@@ -15,9 +15,8 @@ connectDB();
 // Cross Origin Resource Sharing
 app.use((req, res, next) => {
   const allowedOrigins = [
-    'https://www.synergisticagribusiness.com/',
-    'http://www.synergisticagribusiness.com/',
-    'https://mukundi-agriculture-backend.herokuapp.com/'
+    'www.synergisticagribusiness.com/',
+    'mukundi-agriculture-backend.herokuapp.com/'
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
